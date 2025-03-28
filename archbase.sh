@@ -30,6 +30,7 @@ if ! command -v fzf > /dev/null; then
         exit 1
     fi
 fi
+read
 # drive - re order to arch wiki in order of "first needed"
 working_drive="$(lsblk -ndo path,size | fzf --prompt "Select drive: " | awk '{print $1}')"
 if [[ "${working_drive}" =~ "nvme" ]]; then

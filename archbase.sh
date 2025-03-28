@@ -162,7 +162,7 @@ case "${cpu_vendor}" in
     * )
         echo "Could not determine microcode. Skipping."
         ;;
-fi
+esac
 pacstrap -K /mnt base linux-lts linux-firmware bash-completion base-devel vim networkmanager grub efibootmgr
 
 

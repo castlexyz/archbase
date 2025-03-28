@@ -55,7 +55,9 @@ done
 # password
 while true; do
     read -p "Enter password: " password_var
-    read -p "Enter password: " password_var_confirm
+    clear
+    read -p "Confirm password: " password_var_confirm
+    clear
     case "${password_var}" in
         "" )
             echo "Can not be blank."
@@ -75,6 +77,7 @@ cpu_vendor="$(grep /proc/cpuinfo -e "vendor_id" | head --line 1 | awk '{print $3
 #hostname
 while true; do
     read -p "Enter hostname: " hostname_var
+    clear
     case "${hostname_var}" in
         "" )
             echo "Can not be blank."
@@ -99,6 +102,7 @@ done
 ##############################################
 while true; do
     read -p "This will IRREVERSIBLY wipe ${working_drive}. Continue (y/N)?" response
+    clear
     case "${response}" in
         [Yy]* )
             break
@@ -233,5 +237,4 @@ EOF
 ############################
 umount -R /mnt
 clear
-read -p "Press enter to reboot..."
 reboot

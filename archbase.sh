@@ -32,6 +32,7 @@ if ! command -v fzf > /dev/null; then
 fi
 # drive - re order to arch wiki in order of "first needed"
 working_drive="$(lsblk -ndo path,size | fzf --prompt "Select drive: " | awk '{print $1}')"
+clear
 if [[ "${working_drive}" =~ "nvme" ]]; then
     working_drive_suffix="p"
 else
@@ -40,6 +41,7 @@ fi
 # username
 while true; do
     read -p "Enter username: " username_var && echo
+    clear
     case "${username_var}" in
         "" )
             echo "Can not be blank."

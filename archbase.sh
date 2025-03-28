@@ -25,14 +25,13 @@ if [[ $(timedatectl show -p NTPSynchronized --value) != "yes" ]]; then
 fi
 if ! command -v fzf > /dev/null; then
     echo "Installing 'fzf'..."
-    if ! sudo pacman -Sy fzf --noconfirm > /dev/null; then
+    if ! sudo pacman -Sy fzf --noconfirm; then
         echo "[ Failed to install 'fzf'. ]"
         exit 1
     fi
 fi
-read
 # drive - re order to arch wiki in order of "first needed"
-working_drive="$(lsblk -ndo path,size | fzf --prompt "Select drive: " | awk '{print $1}')" && echo
+working_drive="$(lsblk -ndo path,size | fzf --prompt "Select drive: " | awk '{print $1}')"
 if [[ "${working_drive}" =~ "nvme" ]]; then
     working_drive_suffix="p"
 else
@@ -55,8 +54,8 @@ while true; do
 done
 # password
 while true; do
-    read -s -p "Enter password: " password_var && echo
-    read -s -p "Enter password: " password_var_confirm && echo
+    read -p "Enter password: " password_var
+    read -p "Enter password: " password_var_confirm
     case "${password_var}" in
         "" )
             echo "Can not be blank."
@@ -75,7 +74,7 @@ timezone_var="$(timedatectl show -p Timezone --value)"
 cpu_vendor="$(grep /proc/cpuinfo -e "vendor_id" | head --line 1 | awk '{print $3}')"
 #hostname
 while true; do
-    read -p "Enter hostname: " hostname_var && echo
+    read -p "Enter hostname: " hostname_var
     case "${hostname_var}" in
         "" )
             echo "Can not be blank."
@@ -221,10 +220,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # ---- services ----
 systemctl enable NetworkManager.service
-
-
-# ---- done ----
-exit
 EOF
 
 

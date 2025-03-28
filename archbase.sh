@@ -221,6 +221,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # ---- services ----
 systemctl enable NetworkManager.service
+
+
+# ---- done ----
+exit
 EOF
 
 
@@ -232,7 +236,6 @@ EOF
 #  \__,_|\___/|_| |_|\___| #
 #                          #
 ############################
-exit
 umount -R /mnt
 clear
 read -p "Press enter to reboot..."

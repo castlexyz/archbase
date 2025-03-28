@@ -32,7 +32,7 @@ if ! command -v fzf > /dev/null; then
 fi
 read
 # drive - re order to arch wiki in order of "first needed"
-working_drive="$(lsblk -ndo path,size | fzf --prompt "Select drive: " | awk '{print $1}')"
+working_drive="$(lsblk -ndo path,size | fzf --prompt "Select drive: " | awk '{print $1}')" && echo
 if [[ "${working_drive}" =~ "nvme" ]]; then
     working_drive_suffix="p"
 else
@@ -40,7 +40,7 @@ else
 fi
 # username
 while true; do
-    read -p "Enter username: " username_var
+    read -p "Enter username: " username_var && echo
     case "${username_var}" in
         "" )
             echo "Can not be blank."
@@ -70,11 +70,12 @@ while true; do
     esac
 done
 # timezone
-timezone_var="$(timedatectl list-timezones | fzf --prompt "Select timezone: " --query "$(timedatectl show -p Timezone --value)")"
+timezone_var="$(timedatectl show -p Timezone --value)"
+# microcode
 cpu_vendor="$(grep /proc/cpuinfo -e "vendor_id" | head --line 1 | awk '{print $3}')"
 #hostname
 while true; do
-    read -p "Enter hostname: " hostname_var
+    read -p "Enter hostname: " hostname_var && echo
     case "${hostname_var}" in
         "" )
             echo "Can not be blank."
@@ -236,6 +237,3 @@ umount -R /mnt
 clear
 read -p "Press enter to reboot..."
 reboot
-
-
-# EOF

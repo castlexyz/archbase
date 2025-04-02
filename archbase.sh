@@ -238,5 +238,4 @@ EOF
 #                          #
 ############################
 umount -R /mnt
-clear
 reboot

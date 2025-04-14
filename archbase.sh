@@ -109,9 +109,6 @@ while true; do
         [Yy]* )
             break
             ;;
-        [Nn]* )
-            exit 0
-            ;;
         * )
             exit 0
             ;;

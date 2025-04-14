@@ -166,7 +166,7 @@ case "${cpu_vendor}" in
         echo "Could not determine microcode. Skipping."
         ;;
 esac
-pacstrap -K /mnt base linux-lts linux-firmware bash-completion base-devel vim networkmanager grub efibootmgr
+pacstrap -K /mnt base linux-lts linux-firmware linux-lts-headers bash-completion base-devel vim networkmanager grub efibootmgr
 
 
 ############################
